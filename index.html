@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMIU SE GPA Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SMIU Software Engineering</h1>
+            <p>GPA & CGPA Calculator</p>
+        </div>
+
+        <div class="calculator-container">
+            <div class="semesters-section">
+                <div class="semester-tabs">
+                    <button class="tab-button active" onclick="showSemester(1)">Semester 1</button>
+                    <button class="tab-button" onclick="showSemester(2)">Semester 2</button>
+                    <button class="tab-button" onclick="showSemester(3)">Semester 3</button>
+                </div>
+
+                <!-- Semester 1 -->
+                <div id="semester-1" class="semester-content active">
+                    <div class="course-grid">
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Programming Fundamental</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'pf', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-pf">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Programming Fundamental Lab</span>
+                                <span class="credit-hours">1 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="50" 
+                                           onchange="calculateGrade(this, 'pf_lab', 50, 1)" placeholder="0-50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="50" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-pf_lab">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Application of ICT</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'ict', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-ict">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Application of ICT Lab</span>
+                                <span class="credit-hours">1 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="50" 
+                                           onchange="calculateGrade(this, 'ict_lab', 50, 1)" placeholder="0-50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="50" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-ict_lab">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Discrete Structures</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'discrete', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-discrete">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Calculus and Analytical Geometry</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'calculus', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-calculus">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Functional English</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'english', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-english">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Semester 2 -->
+                <div id="semester-2" class="semester-content">
+                    <div class="course-grid">
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Object Oriented Programming</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'oop', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-oop">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Object Oriented Programming Lab</span>
+                                <span class="credit-hours">1 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="50" 
+                                           onchange="calculateGrade(this, 'oop_lab', 50, 1)" placeholder="0-50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="50" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-oop_lab">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Database Management System</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'dbms', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-dbms">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Database Management System Lab</span>
+                                <span class="credit-hours">1 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="50" 
+                                           onchange="calculateGrade(this, 'dbms_lab', 50, 1)" placeholder="0-50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="50" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-dbms_lab">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Digital Logic Design</span>
+                                <span class="credit-hours">2 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'dld', 100, 2)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-dld">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Digital Logic Design Lab</span>
+                                <span class="credit-hours">1 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="50" 
+                                           onchange="calculateGrade(this, 'dld_lab', 50, 1)" placeholder="0-50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="50" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-dld_lab">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Multivariable Calculus</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'multi_calc', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-multi_calc">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Linear Algebra</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'linear_alg', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-linear_alg">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Semester 3 -->
+                <div id="semester-3" class="semester-content">
+                    <div class="course-grid">
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Data Structures</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'ds', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-ds">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Data Structures Lab</span>
+                                <span class="credit-hours">1 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="50" 
+                                           onchange="calculateGrade(this, 'ds_lab', 50, 1)" placeholder="0-50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="50" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-ds_lab">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Artificial Intelligence</span>
+                                <span class="credit-hours">2 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'ai', 100, 2)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-ai">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Artificial Intelligence Lab</span>
+                                <span class="credit-hours">1 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="50" 
+                                           onchange="calculateGrade(this, 'ai_lab', 50, 1)" placeholder="0-50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="50" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-ai_lab">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Computer Network</span>
+                                <span class="credit-hours">2 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'cn', 100, 2)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-cn">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Computer Network Lab</span>
+                                <span class="credit-hours">1 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="50" 
+                                           onchange="calculateGrade(this, 'cn_lab', 50, 1)" placeholder="0-50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="50" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-cn_lab">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Information Security</span>
+                                <span class="credit-hours">2 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'is', 100, 2)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-is">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Information Security Lab</span>
+                                <span class="credit-hours">1 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="50" 
+                                           onchange="calculateGrade(this, 'is_lab', 50, 1)" placeholder="0-50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="50" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-is_lab">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Probability and Statistics</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'prob_stat', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-prob_stat">-</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Software Engineering</span>
+                                <span class="credit-hours">3 CH</span>
+                            </div>
+                            <div class="marks-input-container">
+                                <div class="input-group">
+                                    <label>Obtained Marks</label>
+                                    <input type="number" class="marks-input" min="0" max="100" 
+                                           onchange="calculateGrade(this, 'se', 100, 3)" placeholder="0-100">
+                                </div>
+                                <div class="input-group">
+                                    <label>Total Marks</label>
+                                    <input type="number" class="marks-input" value="100" readonly style="background: rgba(100,116,139,0.2);">
+                                </div>
+                                <div class="grade-display" id="grade-se">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="results-card">
+                    <div class="result-title">Current Semester GPA</div>
+                    <div class="gpa-display" id="current-gpa">0.00</div>
+                    <div class="semester-summary">
+                        <div>Credit Hours: <span id="current-credits">0</span></div>
+                        <div>Quality Points: <span id="current-points">0.00</span></div>
+                    </div>
+                </div>
+
+                <div class="results-card cgpa-section">
+                    <div class="result-title">Cumulative GPA (CGPA)</div>
+                    <div class="gpa-display" id="cgpa">0.00</div>
+                    <div class="semester-summary">
+                        <div>Total Credits: <span id="total-credits">0</span></div>
+                        <div>Total Points: <span id="total-points">0.00</span></div>
+                    </div>
+                </div>
+
+                <div class="results-card">
+                    <div class="result-title">Semester Results</div>
+                    <div style="font-size: 0.9rem; color: #94a3b8;">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Semester 1:</strong> <span id="sem1-gpa">-</span>
+                            <span style="color: #64748b;">(<span id="sem1-credits">17</span> CH)</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Semester 2:</strong> <span id="sem2-gpa">-</span>
+                            <span style="color: #64748b;">(<span id="sem2-credits">17</span> CH)</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Semester 3:</strong> <span id="sem3-gpa">-</span>
+                            <span style="color: #64748b;">(<span id="sem3-credits">19</span> CH)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="reset-button" onclick="resetAll()">Reset All Data</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Made with ❤️ by Daniyal Ahmed</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
