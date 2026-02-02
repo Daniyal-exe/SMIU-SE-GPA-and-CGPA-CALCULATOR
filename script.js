@@ -38,6 +38,20 @@ const semesterData = {
             'se': { credits: 3, points: 0 }
         },
         totalCredits: 19
+    },
+    4: {
+        courses: {
+            'coal': { credits: 2, points: 0 },
+            'coal_lab': { credits: 1, points: 0 },
+            'sre': { credits: 2, points: 0 },
+            'sre_lab': { credits: 1, points: 0 },
+            'ap': { credits: 2, points: 0 },
+            'ap_lab': { credits: 1, points: 0 },
+            'sda': { credits: 3, points: 0 },
+            'exp': { credits: 3, points: 0 },
+            'isl': { credits: 3, points: 0 }
+        },
+        totalCredits: 18
     }
 };
 
@@ -179,6 +193,7 @@ function resetAll() {
         document.getElementById('sem1-gpa').textContent = '-';
         document.getElementById('sem2-gpa').textContent = '-';
         document.getElementById('sem3-gpa').textContent = '-';
+        document.getElementById('sem4-gpa').textContent = '-';
         
         // Update displays
         updateGPA();
