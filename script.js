@@ -52,6 +52,21 @@ const semesterData = {
             'isl': { credits: 3, points: 0 }
         },
         totalCredits: 18
+    },
+    5: {
+        courses: {
+            'os': { credits: 3, points: 0 },
+            'os_lab': { credits: 1, points: 0 },
+            'automata': { credits: 3, points: 0 },
+            'hci': { credits: 2, points: 0 },
+            'hci_lab': { credits: 1, points: 0 },
+            'scd': { credits: 2, points: 0 },
+            'scd_lab': { credits: 1, points: 0 },
+            'sqe': { credits: 2, points: 0 },
+            'sqe_lab': { credits: 1, points: 0 },
+            'mgmt': { credits: 2, points: 0 }
+        },
+        totalCredits: 18
     }
 };
 
@@ -147,6 +162,199 @@ function updateGPA() {
     document.getElementById('total-points').textContent = allPoints.toFixed(2);
 }
 
+function calculateSemesterGPA(semesterNum) {
+    const semData = semesterData[semesterNum];
+    let totalPoints = 0;
+    let totalCredits = 0;
+
+    for (const courseData of Object.values(semData.courses)) {
+        totalPoints += courseData.points * courseData.credits;
+        totalCredits += courseData.credits;
+    }
+
+    return totalCredits > 0 ? totalPoints / totalCredits : 0;
+}
+
+function calculateOverallCGPA() {
+    let allPoints = 0;
+    let allCredits = 0;
+
+    for (const semData of Object.values(semesterData)) {
+        for (const courseData of Object.values(semData.courses)) {
+            allPoints += courseData.points * courseData.credits;
+            allCredits += courseData.credits;
+        }
+    }
+
+    return allCredits > 0 ? allPoints / allCredits : 0;
+}
+
+function downloadTranscript() {
+    const semesterOrder = [1, 2, 3, 4, 5];
+    const transcriptRows = semesterOrder.map(semesterNum => {
+        const semesterElement = document.getElementById('semester-' + semesterNum);
+        const courses = Array.from(semesterElement?.querySelectorAll('.course-item') || []);
+
+        const rows = courses.map(courseItem => {
+            const title = courseItem.querySelector('.course-name')?.textContent?.trim() || 'Course';
+            const creditsText = courseItem.querySelector('.credit-hours')?.textContent?.trim() || '0 CH';
+            const credits = parseInt(creditsText, 10) || 0;
+            const marks = courseItem.querySelector('.marks-input')?.value?.trim() || '—';
+            const grade = courseItem.querySelector('.grade-display')?.textContent?.trim() || '-';
+            return `
+                <tr>
+                    <td>${title}</td>
+                    <td>${credits} CH</td>
+                    <td>${marks}</td>
+                    <td>${grade}</td>
+                </tr>`;
+        }).join('');
+
+        const semesterGPA = calculateSemesterGPA(semesterNum).toFixed(2);
+        return `
+            <div class="semester-block">
+                <div class="semester-title">Semester ${semesterNum}</div>
+                <div class="semester-summary">GPA: <strong>${semesterGPA}</strong> &nbsp;•&nbsp; Credits: <strong>${semesterData[semesterNum].totalCredits}</strong></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Credits</th>
+                            <th>Marks</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            </div>`;
+    }).join('');
+
+    const overallCGPA = calculateOverallCGPA().toFixed(2);
+    const transcriptHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8" />
+            <title>Student Transcript</title>
+            <style>
+                body {
+                    font-family: 'Poppins', Arial, sans-serif;
+                    margin: 0;
+                    padding: 24px;
+                    color: #111827;
+                    background: #ffffff;
+                }
+                .transcript-wrapper {
+                    max-width: 900px;
+                    margin: 0 auto;
+                    border: 1px solid #d1d5db;
+                    border-radius: 16px;
+                    padding: 28px;
+                    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+                }
+                .header {
+                    text-align: center;
+                    border-bottom: 2px solid #3b82f6;
+                    padding-bottom: 14px;
+                    margin-bottom: 20px;
+                }
+                .header h1 {
+                    margin: 0 0 6px;
+                    font-size: 28px;
+                    color: #1d4ed8;
+                }
+                .header p {
+                    margin: 0;
+                    color: #64748b;
+                }
+                .summary-box {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 12px;
+                    margin-bottom: 20px;
+                }
+                .summary-card {
+                    background: #f8fafc;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 10px;
+                    padding: 12px;
+                    text-align: center;
+                }
+                .summary-card strong {
+                    display: block;
+                    color: #0f172a;
+                    font-size: 16px;
+                    margin-top: 4px;
+                }
+                .semester-block {
+                    margin-bottom: 22px;
+                    page-break-inside: avoid;
+                }
+                .semester-title {
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #0f172a;
+                    margin-bottom: 6px;
+                }
+                .semester-summary {
+                    font-size: 13px;
+                    color: #475569;
+                    margin-bottom: 8px;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 13px;
+                }
+                th, td {
+                    border: 1px solid #e2e8f0;
+                    padding: 8px 10px;
+                    text-align: left;
+                }
+                th {
+                    background: #eff6ff;
+                    color: #1d4ed8;
+                }
+                tr:nth-child(even) td {
+                    background: #f8fafc;
+                }
+                .footer {
+                    margin-top: 20px;
+                    text-align: center;
+                    color: #64748b;
+                    font-size: 12px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="transcript-wrapper">
+                <div class="header">
+                    <h1>SMIU Software Engineering Transcript</h1>
+                    <p>GPA & CGPA Summary</p>
+                </div>
+                <div class="summary-box">
+                    <div class="summary-card">Current CGPA<strong>${overallCGPA}</strong></div>
+                    <div class="summary-card">Total Credits<strong>${Object.values(semesterData).reduce((sum, sem) => sum + sem.totalCredits, 0)}</strong></div>
+                    <div class="summary-card">Generated On<strong>${new Date().toLocaleDateString()}</strong></div>
+                </div>
+                ${transcriptRows}
+                <div class="footer">Generated from SMIU SE GPA Calculator</div>
+            </div>
+        </body>
+        </html>`;
+
+    const printWindow = window.open('', '_blank', 'width=900,height=1100');
+    if (!printWindow) {
+        alert('Please allow popups to download the transcript.');
+        return;
+    }
+
+    printWindow.document.write(transcriptHTML);
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => printWindow.print(), 250);
+}
+
 function showSemester(semesterNum) {
     // Hide all semester content
     document.querySelectorAll('.semester-content').forEach(content => {
@@ -194,6 +402,7 @@ function resetAll() {
         document.getElementById('sem2-gpa').textContent = '-';
         document.getElementById('sem3-gpa').textContent = '-';
         document.getElementById('sem4-gpa').textContent = '-';
+        document.getElementById('sem5-gpa').textContent = '-';
         
         // Update displays
         updateGPA();
